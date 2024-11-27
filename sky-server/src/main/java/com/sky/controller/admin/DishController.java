@@ -100,7 +100,7 @@ public class DishController {
     }
 
     /**
-     * 根据分类id查询菜品
+     * 根据分类id查询菜品用于修改页面回显数据
      *
      * @param categoryId
      * @return

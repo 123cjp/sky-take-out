@@ -118,7 +118,7 @@ public class DishServiceImpl implements DishService {
     }
 
     /**
-     * 根据id查询菜品
+     * 根据id查询菜品用于修改页面回显数据
      *
      * @param id
      */
@@ -171,7 +171,10 @@ public class DishServiceImpl implements DishService {
         Dish dish = Dish.builder()
                 .categoryId(categoryId)
                 .status(StatusConstant.ENABLE)
-                .build();;
+                .build();
+       /* Dish dish1 = new Dish();
+       dish1.setCategoryId(categoryId);
+       dish1.setStatus(StatusConstant.ENABLE);*/
         return dishMapper.list(dish);
     }
 }

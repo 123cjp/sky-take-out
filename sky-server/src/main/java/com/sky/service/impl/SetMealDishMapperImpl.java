@@ -25,9 +25,22 @@ public class SetMealDishMapperImpl implements SetMealDishMapper {
      * 保持菜品和套餐的关联关系
      * @param setMealDishes
      */
-    @Override
+
     public void insertBatch(List<SetmealDish> setMealDishes) {
 
+    }
+    /**
+     * 根据套餐id删除套餐和菜品的关联关系
+     * @param setmealId
+     */
+    @Override
+    public void deleteBySetMealId(Long setmealId) {
+
+    }
+
+    @Override
+    public List<SetmealDish> getBySetmealId(Long id) {
+        return List.of();
     }
 
 
