@@ -4,7 +4,9 @@ import com.github.pagehelper.Page;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.DishFlavor;
 import com.sky.vo.DishVO;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -20,10 +22,22 @@ public interface DishFlavorMapper {
      */
     void insertBatch(List<DishFlavor> flavors);
 
+
     /**
-     * 菜品分页查询
-     * @param dishPageQueryDTO
+     * 根据菜品id删除口味表
+     * @param dishIds
+     */
+    /*@Delete("delete from dish_flavor where dish_id = #{dishId}")*/
+    void deleteByDishId(List<Long> dishIds);
+
+    @Delete("delete from dish_flavor where dish_id = #{dishId}")
+    void  deleteByDishId1(Long dishId);
+    /**
+     * 根据菜品id查询口味表
+     * @param dishId
      * @return
      */
-    Page<DishVO> pageQuery(DishPageQueryDTO dishPageQueryDTO);
+    @Select("select * from dish_flavor where dish_id = #{dishId}")
+    List<DishFlavor> getByDishId(Long dishId);
+
 }

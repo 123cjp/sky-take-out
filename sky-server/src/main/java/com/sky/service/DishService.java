@@ -4,7 +4,10 @@ import com.sky.dto.DishDTO;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
 import com.sky.result.PageResult;
+import com.sky.vo.DishVO;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author 陈建平
@@ -24,4 +27,28 @@ public interface DishService {
      * @return
      */
     PageResult pageQuery(DishPageQueryDTO dishPageQueryDTO);
+
+    /**
+     * 菜品批量删除
+     * @param ids
+     */
+    void deleteBatch(List<Long> ids);
+
+
+
+    /**
+     * 根据id查询菜品
+     * @param id
+     */
+    DishVO getByIdWithFlavor(Long id);
+
+    /**
+     *
+     * @param dishDTO
+     */
+    /**
+     * 根据id修改菜品信息和口味数据
+     * @param dishDTO
+     */
+    void updateWithFlavor(DishDTO dishDTO);
 }
