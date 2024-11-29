@@ -33,4 +33,5 @@ public class ShopController {
         log.info("获取店铺营业状态:{}",status==1?"营业中" : "打样中");
         return Result.success(status);
     }
+
 }
