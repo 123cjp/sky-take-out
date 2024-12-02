@@ -9,7 +9,6 @@ import com.sky.mapper.DishMapper;
 import com.sky.mapper.SetMealMapper;
 import com.sky.mapper.ShoppingCartMapper;
 import com.sky.service.ShoppingCartService;
-import org.apache.http.cookie.SM;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,13 +43,16 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         //只能查询自己的购物车数据
         Long userId = BaseContext.getCurrentId();
         shoppingCart.setUserId(userId);
+
+
         List<ShoppingCart> list = shoppingCartMapper.list(shoppingCart);
         //已经存在，数量加一
         if (list != null && list.size() > 0) {
-            ShoppingCart cart = list.get(0);
-            cart.setNumber(cart.getNumber() + 1);
+            //ShoppingCart cart = list.get(0);
+            shoppingCart = list.get(0);
+            shoppingCart.setNumber(shoppingCart.getNumber() + 1);
             //update shopping_cart set number = ? where id = ?
-            shoppingCartMapper.updateNumberById(cart);
+            shoppingCartMapper.updateNumberById(shoppingCart);
         } else {
             //不存在-需要插入一条购物车数据
             //查询数据是菜品还是套餐,通过判断属性是否为空
