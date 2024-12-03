@@ -108,7 +108,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public void cleanShoppingCart() {
         //获取当前微信用户的id
         Long userId = BaseContext.getCurrentId();
-        shoppingCartMapper.delectByUserId(userId);
+        shoppingCartMapper.deleteByUserId(userId);
     }
     /**
      * 删除购物车一个商品

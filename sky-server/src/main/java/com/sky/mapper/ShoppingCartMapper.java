@@ -41,7 +41,7 @@ public interface ShoppingCartMapper {
      *         Long userId = BaseContext.getCurrentId();
      */
     @Delete("delete from shopping_cart where user_id = #{userId}")
-    void delectByUserId(Long userId);
+    void deleteByUserId(Long userId);
 
     /**
      * 删除购物车一个商品
@@ -49,4 +49,10 @@ public interface ShoppingCartMapper {
      */
     @Delete("delete from shopping_cart where id = #{id}")
     void deleteById(Long id);
+
+    /**
+     * 批量插入购物车数据
+     * @param shoppingCartList
+     */
+    void insertBatch(List<ShoppingCart> shoppingCartList);
 }
