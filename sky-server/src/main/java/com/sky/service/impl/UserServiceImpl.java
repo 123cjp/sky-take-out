@@ -1,5 +1,4 @@
 package com.sky.service.impl;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.sky.constant.MessageConstant;
@@ -14,11 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
-
 /**
  * @author 陈建平
  */
@@ -31,7 +28,6 @@ public class UserServiceImpl implements UserService {
     private WeChatProperties weChatProperties;
     @Autowired
     private UserMapper userMapper;
-
     /**
      * 微信登录
      *
@@ -39,14 +35,12 @@ public class UserServiceImpl implements UserService {
      * @return
      */
     @Override
-    public User wxlogin(UserLoginDTO userLoginDTO) {
+    public User wxLogin(UserLoginDTO userLoginDTO) {
         String openid = getOpenid(userLoginDTO.getCode());
         //判断openid是否为空--为空表示登录失败
         if (openid == null) {
             throw new LoginFailedException(MessageConstant.LOGIN_FAILED);
         }
-
-
         //不为空--是否为新用户
         User user = userMapper.getByOpenid(openid);
         //如果是新用户自动完成注册
@@ -57,11 +51,9 @@ public class UserServiceImpl implements UserService {
                     .build();
             userMapper.insert(user);
         }
-
         //返回这个用户对象
         return user;
     }
-
     /**
      * 调用微信接口服务，获取微信用户的openid
      * @param code
@@ -74,7 +66,6 @@ public class UserServiceImpl implements UserService {
         map.put("js_code", code);
         map.put("grant_type", "authorization_code");
         String json = HttpClientUtil.doGet(WX_LOGIN, map);
-
         JSONObject jsonObject = JSON.parseObject(json);
         String openid = jsonObject.getString("openid");
         return openid;
